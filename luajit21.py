@@ -2192,7 +2192,10 @@ def formatk(tr, idx):
             s = '"%s"' % k
 
     elif it == "function":
-        s = fmtfunc(k.cast(typ("GCfunc*")))
+        try:
+            s = fmtfunc(k.cast(typ("GCfunc*")))
+        except:
+            s = " func addr: 0x%x " % k
 
     elif it == "userdata":
         if t == 12:
