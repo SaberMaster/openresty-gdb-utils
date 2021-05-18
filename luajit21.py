@@ -728,9 +728,13 @@ def noderef(r):
     return mref(r, "Node")
 
 def itype(o):
+    if is_gc64():
+        return newval("uint32_t", o['it64'] >> 47)
     return o['it']
 
 def tvisnil(o):
+    if is_gc64():
+        return -1 == o['it64']
     return itype(o) == LJ_TNIL()
 
 def tvisfunc(o):
